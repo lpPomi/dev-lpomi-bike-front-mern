@@ -1,13 +1,10 @@
 
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-
 // to use shema validation from yup. Use { .. } because is an export
 import { createTracSchema } from '../validations/CreateTracValidation';
-
 
 // to implement the datepicker 
 import DatePicker from 'react-datepicker';
@@ -16,66 +13,114 @@ import { useState } from 'react';
 import moment from 'moment';
 
 
+function Datepicker2() {
 
-function FormCreateTrac() {
+  /* for the trac object */
+  const [trac, setTrac] = useState([]);
+
+  /* for the datepicker date */
+  const [tracDate, setTracDate] = useState('');
+
+
 
   // include the shema with the resolve function in the form
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(createTracSchema),
   });
 
-  // save all inputs from the form in the data object
-  const onSubmit = (data) => {
-    console.log(data);
 
-  };
-
-
-
-  /* return data to another component .. open */
-
-  // to use the datepicker
+  // set the startdate for the datepicker
   const [startDate, setStartDate] = useState(new Date());
 
-  // show the selected date
-  const showDate = (date) => {
-    //console.log(date);
-    console.log('Date: ', moment(date).format("DD-MM-yyyy"));
 
+  // save all inputs from the form in the tracObj object
+  const onSubmit = (tracObj) => {
+    //alert(JSON.stringify(tracObj));
+    setTrac(tracObj);
+    console.log('trac object from the form submit ', tracObj);
+
+    // call the function saveTrac to add the datepicker value with the form append method
+    // later save the tracObj with all fields in mongo DB 
+    saveTrac(tracObj);
   };
+
+
+  // show the selected date
+  const convertStoreTracDate = (date) => {
+    var dateConverted = '';
+    //console.log(date);
+    /* console.log('Date: ', moment(date).format("DD-MM-yyyy")); */
+    console.log('Date: ', moment(date).format("DD-mm-yyyy"));
+    dateConverted = moment(date).format("DD-mm-yyyy");
+    setTracDate(dateConverted);
+  };
+
+
+
+
+  function saveTrac(trac) {
+    console.log('Post Object ', trac);
+
+    // to append the datepicker in the form fields
+    const form = new FormData();
+
+    // read all fields from the form (except datepicker)
+    for (let key in trac) {
+      form.append(key, trac[key]);
+      //console.log('show the content of keys ', key, trac[key]);
+    }
+    // read the datepicker tracDate value and append it to the form
+    form.append('datePicker', tracDate);
+
+    // show all the form fields .. also with the datePicker field
+    for (var key of form.entries()) {
+      console.log('Form entries ', key[0] + " --> " + key[1]);
+    }
+
+    // now we can save the form into MongoDB!
+
+  }
 
 
 
 
   return (
 
-
     <div>
-      <Header />
+
       <div className='mb-5 text-2xl flex justify-start '>
         Create Ride Tracking
       </div >
 
-      <div className='mt-8 text-base '>
-        <p className='mb-1'>track date</p>
-        <br />
-        <DatePicker className='bg-green-300'
-          selected={startDate}
-          onChange={showDate}
-          //onChange={...register("tracDate")}
-          dateFormat="dd-MM-yyyy"
 
-        />
+      {/*  create datepicker to get the date in format dd:mm.yyyy
+           the date will be append to the form later
+      */}
+      <div className='flex justify-center '>
 
+        <div>
+          <p className='mb-2'>Select the track date:</p>
+          {/* datepicker */}
+          <DatePicker className='bg-green-300 mb-9  hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300'
+            selected={startDate}
+            dateFormat="dd-MM-yyyy"
+            onChange={(date) => {
+              setStartDate(date);
+              setTracDate(moment(date).format("DD-MM-yyyy"));
+            }}
+          //onChange={convertStoreTracDate}
+          />
+        </div>
       </div>
 
 
-      <div className='text-base flex justify-evenly '>
-        <span className="mr-16 ml-4">KM</span><span className="mr-3 ml-3">Max vel</span><span className="ml-6">Average vel</span>
-      </div >
 
+      {/*       create the form to get the other fields */}
       <form onSubmit={handleSubmit(onSubmit)}>
 
+        <div className='text-base flex justify-evenly '>
+          <span className="mr-16 ml-4">KM</span><span className="mr-3 ml-3">Max vel</span><span className="ml-6">Average vel</span>
+        </div >
 
         <div className="flex justify-evenly py-4 bg-green-300  hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300">
           {/* ************** KM TOTAL ************** */}
@@ -149,11 +194,10 @@ function FormCreateTrac() {
 
         </div>
       </form >
-      <Footer />
-    </div >
 
+    </div >
 
   );
 }
 
-export default FormCreateTrac;;
+export default Datepicker2;

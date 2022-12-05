@@ -12,23 +12,73 @@ import { createTracSchema } from '../validations/CreateTracValidation';
 // to implement the datepicker 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import moment from 'moment';
 
 
 
-function FormCreateTrac() {
+function DatePicker1() {
+
+  const inputRef = useRef();
+
+  /* const inputElement = useRef();
+
+  const focusInput = () => {
+    inputElement.current.focus();
+    inputRef.current.focus();
+  };
+ */
 
   // include the shema with the resolve function in the form
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(createTracSchema),
   });
 
+  const [birthdate, setBirthdate] = useState("");
+
+
+  const [submitOn, setSubmitOn] = useState(false);
+
+  /*   useEffect(() => {
+  
+      {
+        console.log('+++++++++++++++++++++++++++++++++++++');
+        console.log('In useEffect show the pass parameters');
+        console.log('birthdate = ');
+        console.log('+++++++++++++++++++++++++++++++++++++');
+      }
+      submitOn && (
+        updateFullTrac(data)
+      );
+  
+    }, [birthdate]); // if you get a parameter like id is better to put it here
+   */
+
+
   // save all inputs from the form in the data object
   const onSubmit = (data) => {
+    console.log('this is the submit button');
     console.log(data);
+    // you can choose also this method
+    console.log(birthdate);
+    setSubmitOn(true);
+
 
   };
+
+
+
+  /*
+      ***********************************************
+      use here the update function and the verb PUT ! 
+      ***********************************************
+    */
+  function updateFullTrac(data) {
+
+    console.log('in updateFullTrac function');
+    console.log('Trac object: ', data);
+  }
+
 
 
 
@@ -40,10 +90,26 @@ function FormCreateTrac() {
   // show the selected date
   const showDate = (date) => {
     //console.log(date);
-    console.log('Date: ', moment(date).format("DD-MM-yyyy"));
-
+    /* console.log('Date: ', moment(date).format("DD-MM-yyyy")); */
+    console.log('Date: ', moment(date).format("mm/dd/yyyy"));
   };
 
+
+
+  const getImage = (date) => {
+
+    //console.log('Ref ', inputRef.current);
+
+    // setBirthdate(date);
+    setBirthdate(moment(date).format("DD-MM-yyyy"));
+    inputRef.current = birthdate;
+    console.log('Ref ', inputRef.current);
+    //register("image");
+    console.log('Date ', date);
+  };
+
+
+  /*   { console.log('with format ', birthdate); } */
 
 
 
@@ -51,31 +117,59 @@ function FormCreateTrac() {
 
 
     <div>
-      <Header />
-      <div className='mb-5 text-2xl flex justify-start '>
-        Create Ride Tracking
-      </div >
-
-      <div className='mt-8 text-base '>
-        <p className='mb-1'>track date</p>
-        <br />
-        <DatePicker className='bg-green-300'
-          selected={startDate}
-          onChange={showDate}
-          //onChange={...register("tracDate")}
-          dateFormat="dd-MM-yyyy"
-
-        />
-
-      </div>
 
 
-      <div className='text-base flex justify-evenly '>
-        <span className="mr-16 ml-4">KM</span><span className="mr-3 ml-3">Max vel</span><span className="ml-6">Average vel</span>
-      </div >
 
       <form onSubmit={handleSubmit(onSubmit)}>
 
+
+        <div className='mb-5 text-2xl flex justify-start '>
+          Create Ride Tracking
+        </div >
+
+        <div className='mt-8 text-base '>
+          <p className='mb-1'>track date</p>
+          <br />
+
+
+          {/* datepicker */}
+
+          <DatePicker className='bg-green-300'
+            type="birthdate"
+            name="birthdate"
+            id="birthdate"
+            selected={startDate}
+            // onChange={showDate}
+            // onChange={getImage}
+            ref={inputRef}
+            onChange={(date) => {
+              setBirthdate(moment(date).format("DD-MM-yyyy"));
+              getImage(date);
+              console.log('HIHI');
+            }
+            }
+          // onChange={(date) => setBirthdate(date)}
+          //onChange={...register("tracDate")}
+          /*  dateFormat="dd-MM-yyyy" */
+          />
+
+          <br />
+
+
+          <input
+            id='birthdate'
+            value={birthdate}
+            ref={inputRef}
+            type="text" placeholder="date" {...register("birthdate")}
+            autoFocus
+          />
+
+
+
+        </div>
+        <div className='text-base flex justify-evenly '>
+          <span className="mr-16 ml-4">KM</span><span className="mr-3 ml-3">Max vel</span><span className="ml-6">Average vel</span>
+        </div >
 
         <div className="flex justify-evenly py-4 bg-green-300  hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300">
           {/* ************** KM TOTAL ************** */}
@@ -149,11 +243,12 @@ function FormCreateTrac() {
 
         </div>
       </form >
-      <Footer />
+
     </div >
+
 
 
   );
 }
 
-export default FormCreateTrac;;
+export default DatePicker1;;

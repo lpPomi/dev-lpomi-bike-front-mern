@@ -39,5 +39,7 @@ export const createTracSchema = yup.object().shape({
     .max(60)
     .required('requiered'),
 
+  //birthdate: yup.date().default(() => new Date()),
+
   //rideTime: yup.time().min(09).max(19).required(),
 });
