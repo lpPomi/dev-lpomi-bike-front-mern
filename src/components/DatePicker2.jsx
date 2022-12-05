@@ -11,6 +11,10 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 import moment from 'moment';
+import Swal from 'sweetalert2';
+
+
+import { useNavigate } from 'react-router';
 
 
 function Datepicker2() {
@@ -37,7 +41,7 @@ function Datepicker2() {
   const onSubmit = (tracObj) => {
     //alert(JSON.stringify(tracObj));
     setTrac(tracObj);
-    console.log('trac object from the form submit ', tracObj);
+    //console.log('trac object from the form submit ', tracObj);
 
     // call the function saveTrac to add the datepicker value with the form append method
     // later save the tracObj with all fields in mongo DB 
@@ -55,27 +59,54 @@ function Datepicker2() {
     setTracDate(dateConverted);
   };
 
-
+  const navigate = useNavigate();
 
 
   function saveTrac(trac) {
-    console.log('Post Object ', trac);
+
+
+    //console.log('Trac Object ', trac);
 
     // to append the datepicker in the form fields
     const form = new FormData();
-
+    //form;
     // read all fields from the form (except datepicker)
     for (let key in trac) {
       form.append(key, trac[key]);
-      //console.log('show the content of keys ', key, trac[key]);
+      // console.log('show the content of keys ', key, trac[key]);
     }
-    // read the datepicker tracDate value and append it to the form
-    form.append('datePicker', tracDate);
 
-    // show all the form fields .. also with the datePicker field
-    for (var key of form.entries()) {
-      console.log('Form entries ', key[0] + " --> " + key[1]);
+    if (tracDate.length === 0) {
+      //alert('Select Date');
+      //console.log('no date selected');
+
+      Swal.fire({
+        icon: 'error',
+        title: 'You don have select a date',
+        confirmButtonText: 'go back',
+
+      }).then((result) => {
+        /* Read more about isConfirmed */
+
+        if (result.isConfirmed) {
+          Swal.fire('going back...', '', 'success');
+          window.location.reload();
+          navigate('/home');
+        }
+
+      });
+
+
+    } else {    // read the datepicker tracDate value and append it to the form
+      form.append('datePicker', tracDate);
+
+      // show all the form fields .. also with the datePicker field
+      for (var key of form.entries()) {
+        console.log('Form entries ', key[0] + " --> " + key[1]);
+      }
+
     }
+
 
     // now we can save the form into MongoDB!
 
@@ -99,9 +130,9 @@ function Datepicker2() {
       <div className='flex justify-center '>
 
         <div>
-          <p className='mb-2'>Select the track date:</p>
+          <p className='mb-2 text-center'>Select the track date:</p>
           {/* datepicker */}
-          <DatePicker className='bg-green-300 mb-9  hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300'
+          <DatePicker className='bg-green-300 mb-9  hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300 text-center'
             selected={startDate}
             dateFormat="dd-MM-yyyy"
             onChange={(date) => {
