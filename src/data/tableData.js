@@ -9,7 +9,7 @@ export default [
     tourMode: 'city',
     tourTrouble: 'no',
     weather: 'sunny',
-    dateTrac: '2021-11-16T23:04:32Z',
+    tracDate: '02-12-2022',
   },
   {
     id: '2',
@@ -21,7 +21,7 @@ export default [
     tourMode: 'city',
     tourTrouble: 'no',
     weather: 'cloudy',
-    dateTrac: '2021-12-16T15:04:30Z',
+    tracDate: '15-12-2022',
   },
   {
     id: '3',
@@ -33,6 +33,6 @@ export default [
     tourMode: 'city',
     tourTrouble: 'no',
     weather: 'rain',
-    dateTrac: '2022-10-04T12:04:31Z',
+    tracDate: '19-12-2022',
   },
 ];

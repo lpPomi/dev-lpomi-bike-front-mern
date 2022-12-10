@@ -43,10 +43,11 @@ export default [
   },
   {
     Header: 'date',
-    accessor: 'dateTrac',
-    Cell: ({ value }) => {
-      /*  return format(new Date(value), 'dd/MM/yyyy'); */
-      return moment(value).format('DD-MM-yyyy');
-    },
+    accessor: 'tracDate',
+    /*  Cell: ({ value }) => {
+      //  return format(new Date(value), 'DD/MM/yyyy'); 
+      //     return moment(value).format('DD-MM-yyyy'); 
+      return moment().format('YYYY-MM-DD');
+    }, */
   },
 ];

@@ -6,3 +6,13 @@ module.exports = {
   },
   plugins: [],
 };
+
+/* 
+extend: {
+   height: {
+        128: '32rem',
+      }, 
+      screens: {
+        mf: "990px",
+      },
+}, */

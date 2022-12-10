@@ -6,9 +6,9 @@ function App() {
   return (
 
     <div>
-      {/*       <Header /> */}
+      <Header />
       <Router />
-      {/*      <Footer /> */}
+      <Footer />
     </div>
   );
 }
