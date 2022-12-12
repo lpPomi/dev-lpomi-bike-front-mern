@@ -8,10 +8,17 @@ import FormCreateTrac from './FormCreateTrac';
 
 import FormTmp from './FormTmp';
 
+import TextHome from '../components/TextHome';
+
+{/* <div className='container mx-auto mt-4 bg-img'> */ }
 
 function Home() {
   return (
-    <div className='container mx-auto mt-4'>
+    <div className='bg-img '>
+
+      asdadasd
+      <TextHome />
+
 
       {/*  <FormTmp /> */}
       {/*       <Header /> */}
@@ -23,12 +30,12 @@ function Home() {
       {/*      <Footer /> */}
 
 
-      {/* flex */}
-      <div className="flex justify-center items-start h-32 bg-gray-300">
-        <div className="bg-blue-300 w-64 p-4 m-2">Col1</div>
-        <div className="bg-blue-300 w-64 p-4 m-2">Col2</div>
-        <div className="bg-blue-300 w-64 p-4 m-2">Col3</div>
-      </div>
+      {/* flex justify-center items-start h-32 bg-gray-300 */}
+      {/*  <div className="flex ">
+        <div className="bg-blue-500 w-64 p-4 m-2">Col1</div>
+        <div className="bg-blue-500 w-64 p-4 m-2">Col2</div>
+        <div className="bg-blue-500 w-64 p-4 m-2">Col3</div>
+      </div> */}
 
     </div>
   );

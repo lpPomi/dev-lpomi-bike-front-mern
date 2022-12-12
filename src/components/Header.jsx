@@ -15,39 +15,50 @@ function Header() {
     <header>
       <div >
         {/* Logo  */}
-        <div className='flex justify-between  bg-zinc-800 text-white rounded-md shadow-md shadow-black px-1 py-2'>
-          <img src={imgReact} className="app-logo" alt="Logotipo" />
-          <span >
+        {/*       <div className='flex justify-between text-white bg-zinc-900 px-1 py-1'>
+          <img src={imgReact} className="ml-2 mt-2" alt="Logotipo" />
+          <span className='mr-3 mt-1' >
             <strong>Bike Ride Tracking</strong>
           </span>
-        </div>
+        </div> */}
 
         {/*  Menue  */}
         <nav >
-          <div className="flex justify-end gap-5 mt-2 bg-sky-300">
-            <div className=" bg-green-500 text-sm px-2 py-1 rounded-sm shadow-md shadow-black">
-              <NavLink to="/" end>Home</NavLink>
-            </div>
+          <div className='flex justify-between bg-zinc-900 ' >
 
-            <div className="bg-green-500 text-sm px-2 py-1 rounded-sm shadow-md shadow-black">
-              <NavLink to="/create">Create</NavLink>
-            </div>
 
-            <div className="bg-green-500 text-sm px-2 py-1 rounded-sm shadow-md shadow-black">
-              <NavLink to="/list">List</NavLink>
+            {/* part begin react icon */}
+            <div className='text-white bg-zinc-900 px-1 py-1 '>
+              <img src={imgReact} className="ml-2 mt-2" alt="Logotipo" />
             </div>
 
 
-            <div>
-              <button className="bg-green-500 text-sm px-2 py-1 rounded-sm shadow-md shadow-black" onClick={refreshPage}>F5</button>
+            {/* part end header buttons */}
+            <div className="flex justify-end gap-5 items-start  pt-[12.6667px]  bg-zinc-900 h-14 ">
+              <div className=" bg-green-500 text-sm px-2 py-1 rounded-sm  ">
+                <NavLink to="/" end>Home</NavLink>
+              </div>
+
+              <div className="bg-green-500 text-sm px-2 py-1 rounded-sm  ">
+                <NavLink to="/create">Create</NavLink>
+              </div>
+
+              <div className="bg-green-500 text-sm px-2 py-1 rounded-sm  ">
+                <NavLink to="/list">List</NavLink>
+              </div>
+
+              <div>
+                <button className="bg-green-500 text-sm px-2 py-1 mr-3 rounded-sm " onClick={refreshPage}>F5</button>
+              </div>
             </div>
+
 
           </div>
         </nav>
 
-      </div>
-    </header>
+      </div >
+    </header >
   );
 }
 
-export default Header;
+export default Header;;

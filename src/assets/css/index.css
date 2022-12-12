@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-img {
+  height: 902px;
+  width: 100%;
+  background-image: linear-gradient(
+      90.23deg,
+      rgba(0, 0, 0, 0.9) 15.52%,
+      rgba(0, 0, 0, 0.153) 71.29%
+    ),
+    url('../images/lino1.jpg');
+  background-size: cover;
+  background-position: center;
+}
