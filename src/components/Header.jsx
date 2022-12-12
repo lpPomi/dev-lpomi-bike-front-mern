@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 
 function Header() {
 
-
   function refreshPage() {
     window.location.reload(false);
   }
@@ -26,7 +25,6 @@ function Header() {
         <nav >
           <div className='flex justify-between bg-zinc-900 ' >
 
-
             {/* part begin react icon */}
             <div className='text-white bg-zinc-900 px-1 py-1 '>
               <img src={imgReact} className="ml-2 mt-2" alt="Logotipo" />
@@ -34,7 +32,7 @@ function Header() {
 
 
             {/* part end header buttons */}
-            <div className="flex justify-end gap-5 items-start  pt-[12.6667px]  bg-zinc-900 h-14 ">
+            <div className="flex justify-end gap-5 items-start  pt-[12.6667px]  bg-zinc-900 h-14">
               <div className=" bg-green-500 text-sm px-2 py-1 rounded-sm  ">
                 <NavLink to="/" end>Home</NavLink>
               </div>

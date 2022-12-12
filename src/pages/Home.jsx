@@ -14,31 +14,10 @@ import TextHome from '../components/TextHome';
 
 function Home() {
   return (
-    <div className='bg-img '>
-
-      asdadasd
+    <div className='bg-img'>
       <TextHome />
-
-
-      {/*  <FormTmp /> */}
-      {/*       <Header /> */}
-      {/*  <TracTable /> */}
-      {/*  <FormCreateTrac /> */}
-      {/*       <TracTable />
-      <DatePicker1 /> */}
-      {/*   <DatePicker2 /> */}
-      {/*      <Footer /> */}
-
-
-      {/* flex justify-center items-start h-32 bg-gray-300 */}
-      {/*  <div className="flex ">
-        <div className="bg-blue-500 w-64 p-4 m-2">Col1</div>
-        <div className="bg-blue-500 w-64 p-4 m-2">Col2</div>
-        <div className="bg-blue-500 w-64 p-4 m-2">Col3</div>
-      </div> */}
-
-    </div>
+    </div >
   );
 }
 
-export default Home;;
+export default Home;;;

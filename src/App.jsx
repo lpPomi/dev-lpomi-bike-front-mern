@@ -5,7 +5,8 @@ import Footer from './components/Footer';
 function App() {
   return (
 
-    <div >
+    /* className='bg-green-200'   */
+    <div>
       <Header />
       <Router />
       <Footer />
