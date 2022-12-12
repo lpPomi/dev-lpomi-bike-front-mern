@@ -121,115 +121,135 @@ function FormCreateTrac() {
   }
 
 
-
-
   return (
 
-    <div className="container bg-gray-400 mx-auto mt-4">
 
-      <div className='flex justify-start mb-5 text-2xl'>
-        Create Ride Tracking
-      </div >
+    /*  className="bg-img container bg-gray-400 mx-auto mt-4" */
 
+    <div className="bg-img">
+
+      <div className='flex flex-col items-start'>
+        <div className=' mx-6 mt-2 font-extrabold text-[50px] ml-10 mb-8 text-white'>
+          Create Ride Tracking
+        </div >
+      </div>
 
       {/*  create datepicker to get the date in format dd:mm.yyyy
        the date will be append to the form later
-  */}
-      <div className='flex justify-center items-start h-15 bg-blue-400'>
+container mx-auto
+bg-blue-400 
+      */}
 
-        <div>
-          <p className='mb-2 text-center'>Select the track date:</p>
-          <DatePicker className='bg-green-300 mb-9  hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300 text-center'
-            selected={startDate}
-            dateFormat="dd-MM-yyyy"
-            onChange={(date) => {
-              setStartDate(date);
-              setTracDate(moment(date).format("DD-MM-yyyy"));
-            }}
-          //onChange={convertStoreTracDate}
-          />
-        </div>
-      </div>
+      <div className='flex justify-center'>
+
+        <div className='flex justify-center w-[360px] h-[180px]' >
+
+          <div >
+            <p className='mb-2 text-center text-white '>Select the track date:</p>
+            <DatePicker className='bg-transparent mb-9 hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300 text-center'
+              selected={startDate}
+              dateFormat="dd-MM-yyyy"
+              onChange={(date) => {
+                setStartDate(date);
+                setTracDate(moment(date).format("DD-MM-yyyy"));
+              }}
+            //onChange={convertStoreTracDate}
+            />
+          </div>
+        </div >
+      </div >
 
 
       {/*       create the form to get the other fields */}
-      <form onSubmit={handleSubmit(onSubmit)}>
 
-        <div className='flex justify-around'>
-          <div>KM</div>
-          <div>Max vel</div>
-          <div>Ave vel</div>
+      <div className='flex justify-center' >
+        <div className='flex justify-center'  >
+
+          <form onSubmit={handleSubmit(onSubmit)}>
+
+
+
+            <div className='flex justify-between text-white w-[820px] font-medium text-[18px] '>
+              <div>KM</div>
+              <div>Max vel</div>
+              <div>Ave vel</div>
+
+            </div>
+
+
+
+            <div className="flex justify-between py-4 mb-16">
+
+              {/* ************** KM TOTAL ************** */}
+              <input className="bg-transparent hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300 px-3 py-2 w-16 focus:outline-none rounded text-white" type="number" placeholder="km" {...register("kmTotal")} />
+
+              {/* ************** MAX SPEED ************** */}
+              <input className="bg-transparent hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300  px-3 py-2 w-16 focus:outline-none rounded b text-white" type="number" placeholder="mx" {...register("maxSpeed")} />
+
+              {/* ************** AVE SPEED ************** */}
+              <input className="bg-transparent  hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300  px-3 py-2 w-16 focus:outline-none rounded  text-white" type="number" placeholder="ave" {...register("averSpeed")} />
+
+            </div>
+
+
+            <p className="text-sm text-red-500">{errors.kmTotal?.message}</p>
+            <p className="text-sm text-red-500">{errors.maxSpeed?.message}</p>
+            <p className="text-sm text-red-500">{errors.averSpeed?.message}</p>
+
+            <div className='flex justify-between mt-6 text-white font-medium text-[18px] '>
+              <div>Ride time</div>
+              <div>Weather</div>
+              <div>Tour</div>
+              <div>Problems</div>
+            </div >
+
+            <div className="flex justify-between py-5  ">
+              <div className="p-1 rounded">
+                <input className="bg-transparent hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300 px-2 w-14 focus:outline-none rounded  text-white" type="number" placeholder="h" {...register("rideHours")} />
+                <span className="text-xl mr-2 text-white">:</span>
+                <input className="bg-transparent hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300 px-2 w-14 focus:outline-none rounded  text-white" type="number" placeholder="m" {...register("rideMin")} />
+              </div>
+
+              {/* ************** Weather ************** */}
+              <select className="bg-transparent px-2 focus:outline-none rounded text-white  hover:bg-[#645858]   " {...register("weather")}>
+                <option value="sunny">sunny</option>
+                <option value="foggy">foggy</option>
+                <option value="cloudy">cloudy</option>
+                <option value="clear">clear</option>
+                <option value="windy">windy</option>
+                <option value="rain">rain</option>
+              </select>
+
+              {/* ************** Tour Mode ************** */}
+              <select className="bg-transparent  px-2 focus:outline-none rounded  text-white hover:bg-[#645858]" {...register("tourMode")}>
+                <option value="city">city</option>
+                <option value="region">region</option>
+                <option value="hils">hils</option>
+                <option value="mixed">mixed</option>
+              </select>
+
+              {/* ************** Tour Trouble ************** */}
+              <select className="bg-transparent px-2 focus:outline-none rounded  text-white hover:bg-[#645858]" {...register("tourTrouble")}>
+                <option value="no">no</option>
+                <option value="flat">flat</option>
+                <option value="accident">accident</option>
+                <option value="nolights">nolights</option>
+                <option value="cold">cold</option>
+              </select>
+
+            </div>
+            <p className="text-sm text-red-500">{errors.rideHours?.message}</p>
+            <p className="text-sm text-red-500">{errors.rideMin?.message}</p>
+
+
+            {/* ************** SUBMIT  ************** */}
+            <div className='flex mt-6 justify-center'>
+              <input className="border-[#3480F1] border-[1px] rounded-[9px]  w-20 mt-7 mb-8 bg-transparent  hover:bg-[#d9d9d944]   px-3 py-2  text-white focus:outline-none " type="submit" value="Save" />
+            </div>
+
+          </form >
         </div >
-
-        <div className="flex justify-around py-4 bg-green-300 hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300">
-
-          {/* ************** KM TOTAL ************** */}
-          <input className="px-3 py-2 w-16 focus:outline-none rounded bg-gray-600 hover:bg-cyan-500  text-white" type="number" placeholder="km" {...register("kmTotal")} />
-
-          {/* ************** MAX SPEED ************** */}
-          <input className="px-3 py-2 w-16 focus:outline-none rounded bg-gray-600 hover:bg-cyan-500  text-white" type="number" placeholder="mx" {...register("maxSpeed")} />
-
-          {/* ************** AVE SPEED ************** */}
-          <input className="px-3 py-2 w-16 focus:outline-none rounded bg-gray-600 hover:bg-cyan-500 text-white" type="number" placeholder="ave" {...register("averSpeed")} />
-
-        </div>
-
-        <p className="text-sm text-red-500">{errors.kmTotal?.message}</p>
-        <p className="text-sm text-red-500">{errors.maxSpeed?.message}</p>
-        <p className="text-sm text-red-500">{errors.averSpeed?.message}</p>
-
-        <div className='flex justify-around mt-6'>
-          <div>Ride time</div>
-          <div>Weather</div>
-          <div>Tour</div>
-          <div>Problems</div>
-        </div >
-
-        <div className="flex justify-around py-5 bg-green-300  hover:shadow-red-500/40 md:shadow-xl md:shadow-red-300 ">
-          <div className="p-1 bg-gray-600 hover:bg-cyan-500 rounded">
-            <input className="px-2 w-14 focus:outline-none rounded bg-gray-600 text-white" type="number" placeholder="h" {...register("rideHours")} />
-            <span className="text-xl mr-2 text-white">:</span>
-            <input className="px-2 w-14 focus:outline-none rounded bg-gray-600 text-white" type="number" placeholder="m" {...register("rideMin")} />
-          </div>
-
-          {/* ************** Weather ************** */}
-          <select className="px-2 focus:outline-none rounded bg-gray-600 hover:bg-cyan-500 text-white" {...register("weather")}>
-            <option value="sunny">sunny</option>
-            <option value="foggy">foggy</option>
-            <option value="cloudy">cloudy</option>
-            <option value="clear">clear</option>
-            <option value="windy">windy</option>
-            <option value="rain">rain</option>
-          </select>
-
-          {/* ************** Tour Mode ************** */}
-          <select className="px-2 focus:outline-none rounded bg-gray-600 hover:bg-cyan-500 text-white" {...register("tourMode")}>
-            <option value="city">city</option>
-            <option value="region">region</option>
-            <option value="hils">hils</option>
-            <option value="mixed">mixed</option>
-          </select>
-
-          {/* ************** Tour Trouble ************** */}
-          <select className="px-2 focus:outline-none rounded bg-gray-600 hover:bg-cyan-500 text-white" {...register("tourTrouble")}>
-            <option value="no">no</option>
-            <option value="flat">flat</option>
-            <option value="accident">accident</option>
-            <option value="nolights">nolights</option>
-            <option value="cold">cold</option>
-          </select>
-
-        </div>
-        <p className="text-sm text-red-500">{errors.rideHours?.message}</p>
-        <p className="text-sm text-red-500">{errors.rideMin?.message}</p>
-
-
-        {/* ************** SUBMIT  ************** */}
-        <div className='flex mt-6 justify-center'>
-          <input className=" w-20 mt-7 mb-8 bg-indigo-600 hover:bg-indigo-500 px-3 py-2 rounded text-white focus:outline-none " type="submit" value="Save" />
-        </div>
-
-      </form >
+      </div >
     </div >
   );
 }
