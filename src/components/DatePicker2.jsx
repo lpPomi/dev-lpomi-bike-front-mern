@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 // to use shema validation from yup. Use { .. } because is an export
-import { createTracSchema } from '../validations/CreateTracValidation';
+import { createTracSchema } from '../validations/FormCreateValidation';
 
 // to implement the datepicker 
 import DatePicker from 'react-datepicker';

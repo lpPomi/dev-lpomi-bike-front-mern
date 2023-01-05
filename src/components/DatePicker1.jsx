@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 // to use shema validation from yup. Use { .. } because is an export
-import { createTracSchema } from '../validations/CreateTracValidation';
+import { createTracSchema } from '../validations/FormCreateValidation';
 
 
 // to implement the datepicker 

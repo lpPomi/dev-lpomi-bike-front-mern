@@ -2,16 +2,70 @@
 import { useMemo } from 'react';
 import { useTable } from 'react-table';
 
-import USERS from '../data/tableData.js';
-import COLUMNS from '../data/columns.js';
+import USERS from '../data/tableDataNew.js';
+//import COLUMNS from '../data/columnsNew';
+
+function TracTableNew() {
 
 
-function TracTable() {
+
+  function handleEdit(row) {
+    console.log(row);
+  }
+
+  const handleClickEditRow = (objecRows) => {
+    console.log(objecRows.row.values);
+  };
+
+  const columns = useMemo(
+    () => [
+      {
+        Header: "ID",
+        accessor: "id"
+      },
+      {
+        Header: "First Name",
+        accessor: "firstName"
+      },
+      {
+        Header: "Last Name",
+        accessor: "lastName"
+      },
+      {
+        Header: "Status",
+        accessor: "status"
+      },
+      {
+        Header: "Action",
+        accessor: "action",
+
+        Cell: (cellObj) => (
+          <div>
+            {/*   {console.log(cellObj)} */}
+            <button onClick={() => handleClickEditRow(cellObj)}>Edit</button>
+            {/* <div>
+              {cellObj.row.values.id}
+            </div> */}
+          </div>
+
+        )
+
+        /*  Cell: ({ value }) => (
+           <div>
+             {console.log(value)}
+             <button onClick={() => handleEdit(value)}>Edit</button>
+           </div>
+         ) */
+      }
+    ],
+    []
+  );
 
 
   /*   the useMemo hook recomends to memorize the rows in columns */
   const data = useMemo(() => USERS, []);
-  const columns = useMemo(() => COLUMNS, []);
+  //const columns = useMemo(() => COLUMNS, []);
+
 
 
   /*  with jsx shorthand syntax 
@@ -21,6 +75,7 @@ function TracTable() {
     columns,
     data
   });
+
 
 
   /* destructuring props & methods from the tableInstance 
@@ -37,11 +92,13 @@ function TracTable() {
 
 
 
+
   return (
+
     <div >
 
       <div className='mb-5 text-2xl flex justify-start '>
-        List Ride Tracking
+        List Test Table with Edit Button
       </div >
 
       {/* render all necessary UI into the table */}
@@ -78,7 +135,8 @@ function TracTable() {
       </table>
 
     </div >
+
   );
 }
 
-export default TracTable;;
+export default TracTableNew;

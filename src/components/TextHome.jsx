@@ -6,7 +6,7 @@ function TextHome() {
   return (
     <div className="text-white mx-6 flex flex-col items-start">
       <div className="font-extrabold text-[80px] leading-[112px] w-[720px] h-[226px] mt-24">
-        Bike Ride<span className="text-[#3480F1]"> Tracking</span> for you ...
+        Bike Ride<span className="text-[#3480F1]"> Tracking</span> for you ... C & N
       </div>
 
       <div className="w-[438px] h-[222px] text-[18px] leading-[150%] mt-16 text-white ">
